@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/reviews">Reviews</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/users">Profils</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/companies">Companies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/sectors">Sectors</a>
+        </li>
+        <div class="d-flex align-items-center p-1em">
+            <a href="/"><button class="btn btn-outline-success">Home</button></a>
+            <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
+        </div>
+      </ul>
+    <div class="container reviews">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <th>Title</th>
+                <th>Compagnies</th>
+                <th>Shown</th>
+                <th>Actions</th>    
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Good place</td>
+                    <td>company1</td>
+                    <td>ON</td>
+                    <td>Edit | Delete</td>
+                </tr>
+                <tr>
+                    <td>Bad choice</td>
+                    <td>company2</td>
+                    <td>OFF</td>
+                    <td>Edit | Delete</td>
+                </tr>
+                <tr>
+                    <td>Nice service</td>
+                    <td>company3</td>
+                    <td>On</td>
+                    <td>Edit | Delete</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
