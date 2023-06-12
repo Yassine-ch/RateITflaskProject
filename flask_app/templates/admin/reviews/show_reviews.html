@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/reviews">Reviews</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/users">Profils</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/companies">Companies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/sectors">Sectors</a>
+        </li>
+        <div class="d-flex align-items-center p-1em">
+            <a href="/"><button class="btn btn-outline-success">Home</button></a>
+            <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
+        </div>
+      </ul>
+    <div class="container reviews">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <th>Title</th>
+                <th>Compagnies</th>
+                <th>Shown</th>
+                <th>Actions</th>    
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Good place</td>
+                    <td>company1</td>
+                    <td>ON</td>
+                    <td><button class="btn"><i class="fa fa-edit"></i> </button> | <!-- Button trigger modal -->
+                      <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-trash"></i>
+                        </button>
+                        
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to delete this user ?
+                              </div>
+                              <div class="modal-footer">
+                                <a href=""><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+                                <a href="/admin/sector/{{sector.id}}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div></td>
+                </tr>
+                <tr>
+                    <td>Bad choice</td>
+                    <td>company2</td>
+                    <td>OFF</td>
+                    <td><button class="btn"><i class="fa fa-edit"></i> </button> | <!-- Button trigger modal -->
+                      <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-trash"></i>
+                        </button>
+                        
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to delete this user ?
+                              </div>
+                              <div class="modal-footer">
+                                <a href=""><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+                                <a href="/admin/sector/{{sector.id}}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div></td>
+                </tr>
+                <tr>
+                    <td>Nice service</td>
+                    <td>company3</td>
+                    <td>On</td>
+                    <td><button class="btn"><i class="fa fa-edit"></i> </button> | <!-- Button trigger modal -->
+                      <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-trash"></i>
+                        </button>
+                        
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">DELETE</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to delete this user ?
+                              </div>
+                              <div class="modal-footer">
+                                <a href=""><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+                                <a href="/admin/sector/{{sector.id}}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

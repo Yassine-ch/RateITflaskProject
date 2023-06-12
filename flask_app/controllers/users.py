@@ -20,13 +20,13 @@ def dashboard():
     if 'user_id' in session:
         user= User.get_by_id({'id': session['user_id']})
         reviews = Review.get_by_user_id({'id': session['user_id']})
-        return render_template('dashboard.html', user=user, reviews=reviews)
+        return render_template('user/dashboard.html', user=user, reviews=reviews)
     elif 'company_id' in session:
         company= Company.get_by_id({'id': session['company_id']})
         # reviews = Review.get_by_user_id({'id': session['user_id']})
         reviews = Review.get_company_reviews({'id': session['company_id']})
         print(reviews,"-*-"*20)
-        return render_template('dashboard.html', company=company, reviews= reviews)
+        return render_template('company/dashboard.html', company=company, reviews= reviews)
     else:
         return redirect('/')
     
@@ -81,7 +81,7 @@ def login():
 @app.route('/admin/users')
 def see_all_users():
     users = User.get_all()
-    return render_template('show_users.html', users=users)
+    return render_template('user/show_users.html', users=users)
 
 @app.route('/logout')
 def logout():

@@ -88,17 +88,22 @@ class Review:
     @classmethod
     def get_company_reviews(cls, data):
         query="""
-        SELECT reviews.title, reviews.rate, reviews.created_at, 
+        SELECT reviews.*, 
         CONCAT(users.first_name, " ", users.last_name) AS poster
         FROM reviews
-        JOIN users ON user_id = users.id
+        LEFT JOIN users ON user_id = users.id
         WHERE reviews.company_id= %(id)s;
         """
         results = connectToMySQL(DATABASE).query_db(query,data)
-        # result =[]
-        # for row in results:
-        #     result.append(cls(row))
-        return results
+        # print("**"*20,results,"**"*20)
+        reviews  = []
+        if results:
+            for row in results:
+                # print("**"*20,cls(row),"**"*20)
+                rev = cls(row)
+                rev.poster = row["poster"]
+                reviews.append(rev)
+        return reviews
     
     @classmethod
     def get_company_avg(cls, data):
@@ -110,5 +115,7 @@ class Review:
     
     @classmethod
     def count(cls):
-        query="SELECT COUNT(*) FROM reviews;"
-        return connectToMySQL(DATABASE).query_db(query)
+        query="SELECT COUNT(*) as reviews_number FROM reviews;"
+        result = connectToMySQL(DATABASE).query_db(query)
+        return result[0]['reviews_number']
+    
