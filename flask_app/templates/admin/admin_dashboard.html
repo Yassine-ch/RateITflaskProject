@@ -11,7 +11,8 @@
 
     <title>Admin Dashboard</title>
 </head>
-<body>        
+<body style="background-image: url('../static/background.png'); background-size: cover;"> 
+    <div class="nav d-flex justify-content-between">      
     <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/admin/dashboard">Dashboard</a>
@@ -28,11 +29,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/admin/sectors">Sectors</a>
         </li>
-        <div class="d-flex align-items-center p-1em">
-            <a href="/"><button class="btn btn-outline-success">Home</button></a>
-            <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
-        </div>
       </ul>
+        <div class="d-flex align-items-center">
+            <a href="/"><button class="btn btn-outline-success" style="margin-right: 10px;">Home</button></a>
+            <a href="/logout"><button class="btn btn-outline-danger" style="margin-right: 16px;">Logout</button></a>
+        </div>
+      </div>
       <div class="container-fluid">
         <div class="d-flex align-items-end p-2">
             <h2 class="title m-2">Welcome </h2> <h1>{{user.first_name}} {{user.last_name}}</h1>

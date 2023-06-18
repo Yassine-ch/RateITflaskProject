@@ -57,5 +57,6 @@ class Sector:
 
     @classmethod
     def count(cls):
-        query="SELECT COUNT(*) FROM sectors;"
-        return connectToMySQL(DATABASE).query_db(query)
+        query="SELECT COUNT(*) AS sectors_number FROM sectors;"
+        result = connectToMySQL(DATABASE).query_db(query)
+        return result[0]['sectors_number']

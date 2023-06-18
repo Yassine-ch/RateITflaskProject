@@ -44,6 +44,15 @@ class User :
     def __repr__(self) -> str:
         return f"{self.first_name}--{self.last_name}--{self.email}"
     
+    @classmethod
+    def update_user(cls,data):
+        query="""
+        UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s,pseudo= %(pseudo)s,email = %(email)s, password = %(password)s, avatar = %(avatar)s
+        WHERE id = %(id)s;
+        """
+        return connectToMySQL(DATABASE).query_db(query,data)
+
+    
     #--------GET BY ID
     @classmethod
     def get_by_id(cls, data):
@@ -67,8 +76,10 @@ class User :
 
     @classmethod
     def count(cls):
-        query="SELECT COUNT(*) FROM users;"
-        return connectToMySQL(DATABASE).query_db(query)
+        query="SELECT COUNT(*) AS users_number FROM users;"
+        result = connectToMySQL(DATABASE).query_db(query)
+        return result[0]['users_number']
+
     
     #--------VALIDATION
     @staticmethod

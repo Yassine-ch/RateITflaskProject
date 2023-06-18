@@ -27,13 +27,17 @@ class Company:
     @classmethod
     def get_all(cls):
         query = """
-        SELECT * FROM companies;
+        SELECT companies.*, sectors.title AS sector FROM companies
+        JOIN sectors ON sector_id = sectors.id;
         """
         results = connectToMySQL(DATABASE).query_db(query)
-        comp = []
-        for row in results:
-            comp.append(cls(row))
-        return comp
+        companies  = []
+        if results:
+            for row in results:
+                comp = cls(row)
+                comp.sector = row["sector"]
+                companies.append(comp)
+        return companies
     
 #----------CREATE COMPANY
     @classmethod
@@ -48,7 +52,7 @@ class Company:
     @classmethod
     def edit_company(cls, data):
         query = """
-        UPDATE companies SET sector_id = %(sector_id)s, adress_id = %(adress_id)s, name= %(name)s ,logo=%(logo)s,site=%(site)s,mf=%(mf)s
+        UPDATE companies SET sector_id = %(sector_id)s, email = %(email)s, name= %(name)s,logo=%(logo)s,site=%(site)s,mf=%(mf)s, password=%(password)s 
         WHERE id = %(id)s;
         """
         return connectToMySQL(DATABASE).query_db(query, data)
@@ -91,24 +95,27 @@ class Company:
         return False
     
     @classmethod
-    def get_all_with_sector(cls):
+    def get_all_with_sector(cls,data):
         query = """
-        SELECT *, sectors.title AS sector 
+        SELECT companies.*, sectors.title AS sector 
         FROM companies
-        JOIN sectors ON sector_id = sectors.id;
+        JOIN sectors ON sector_id = sectors.id
+        WHERE sector_id = %(id)s;
         """
-        result = connectToMySQL(DATABASE).query_db(query)
-        print(result,"-*-"*30)
-        results = []
-        for row in result:
-            results.append(cls(row))
-        print(results,"-/-"*20)
-        return results
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        companies  = []
+        if results:
+            for row in results:
+                comp = cls(row)
+                comp.sector = row["sector"]
+                companies.append(comp)
+        return companies
 
     @classmethod
     def count(cls):
-        query="SELECT COUNT(*) FROM companies;"
-        return connectToMySQL(DATABASE).query_db(query)
+        query="SELECT COUNT(*) AS companies_number FROM companies;"
+        result = connectToMySQL(DATABASE).query_db(query)
+        return result[0]['companies_number']
 
     @staticmethod
     def validate(data):

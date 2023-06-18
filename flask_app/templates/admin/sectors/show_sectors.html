@@ -13,6 +13,7 @@
     <title>Dashboard</title>
 </head>
 <body>
+  <div class="nav d-flex justify-content-between">      
     <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link" href="/admin/dashboard">Dashboard</a>
@@ -29,11 +30,12 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/admin/sectors">Sectors</a>
         </li>
-        <div class="d-flex align-items-center p-1em">
-            <a href="/"><button class="btn btn-outline-success">Home</button></a>
-            <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
-        </div>
       </ul>
+        <div class="d-flex align-items-center">
+            <a href="/"><button class="btn btn-outline-success" style="margin-right: 10px;">Home</button></a>
+            <a href="/logout"><button class="btn btn-outline-danger" style="margin-right: 16px;">Logout</button></a>
+        </div>
+      </div>
     <div class="container mt-5">
         <div class="d-flex justify-content-between">
             <h5>Here the list of Sectors</h5>
@@ -49,7 +51,7 @@
                 {% for sector in sectors %}
                 <tr>
                     <td>{{sector.title}}</td>
-                      <td><button class="btn"><i class="fa fa-edit"></i> </button> | <!-- Button trigger modal -->
+                      <td><a href="/admin/sector/{{sector.id}}/edit"><button class="btn"><i class="fa fa-edit"></i> </button></a> | <!-- Button trigger modal -->
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                           <i class="fa fa-trash"></i>
                           </button>

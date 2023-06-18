@@ -14,7 +14,7 @@ class Review:
         self.photo = data['photo']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.name_company = ""
+        self.name = ""
         self.sector = ""
         self.poster = ""
 
@@ -44,7 +44,7 @@ class Review:
     @classmethod
     def edit_review(cls, data):
         query = """
-        UPDATE reviews SET user_id = %(user_id)s, company_id = %(company_id)s, title= %(title)s ,feedback=%(feedback)s,rate=%(rate)s,photo=%(photo)s
+        UPDATE reviews SET title= %(title)s ,feedback=%(feedback)s, rate=%(rate)s, photo=%(photo)s
         WHERE id = %(id)s;
         """
         return connectToMySQL(DATABASE).query_db(query, data)
@@ -53,7 +53,7 @@ class Review:
     @classmethod
     def delete_review(cls, data):
         query = """
-        delete from reviews where id=%(id)s;
+        DELETE FROM reviews where id=%(id)s;
         """
         return connectToMySQL(DATABASE).query_db(query,data)
 
@@ -61,7 +61,7 @@ class Review:
     @classmethod
     def get_by_id(cls,data):
         query= """
-        SELECT FROM reviews WHERE id= %(id)s;
+        SELECT * FROM reviews WHERE id= %(id)s;
         """
         result = connectToMySQL(DATABASE).query_db(query,data)
         return cls(result[0])
@@ -72,34 +72,34 @@ class Review:
         query= """
         SELECT reviews.id, reviews.user_id, reviews.company_id, reviews.feedback, reviews.rate, 
         reviews.photo, reviews.created_at, reviews.updated_at, 
-        reviews.title AS title, companies.name AS name_company, sectors.title AS sector
+        reviews.title AS title, companies.name AS name, sectors.title AS sector
         FROM reviews
         JOIN companies ON company_id = companies.id
         JOIN sectors ON sector_id = sectors.id
         WHERE reviews.user_id= %(id)s;
         """
         results = connectToMySQL(DATABASE).query_db(query,data)
-        print(results,"*"*30)
-        rev = []
-        for row in results:
-            rev.append(cls(row))
-        return rev
+        reviews  = []
+        if results:
+            for row in results:
+                rev = cls(row)
+                rev.sector = row["sector"]
+                rev.name = row["name"]
+                reviews.append(rev)
+        return reviews
     
     @classmethod
     def get_company_reviews(cls, data):
         query="""
-        SELECT reviews.*, 
-        CONCAT(users.first_name, " ", users.last_name) AS poster
+        SELECT reviews.*, users.pseudo AS poster
         FROM reviews
         LEFT JOIN users ON user_id = users.id
         WHERE reviews.company_id= %(id)s;
         """
         results = connectToMySQL(DATABASE).query_db(query,data)
-        # print("**"*20,results,"**"*20)
         reviews  = []
         if results:
             for row in results:
-                # print("**"*20,cls(row),"**"*20)
                 rev = cls(row)
                 rev.poster = row["poster"]
                 reviews.append(rev)
@@ -108,10 +108,14 @@ class Review:
     @classmethod
     def get_company_avg(cls, data):
         query="""
-        SELECT AVG(rate) FROM reviews
+        SELECT AVG(rate) as rate FROM reviews
         WHERE company_id = %(id)s;
         """
-        return connectToMySQL(DATABASE).query_db(query,data)
+        result = connectToMySQL(DATABASE).query_db(query,data)
+        if result[0]['rate'] == None:
+            return 0
+        else:
+            return "{:.2f}".format(result[0]['rate'])
     
     @classmethod
     def count(cls):
